@@ -3,3 +3,9 @@
 2021-01-28 14:59:07.6703|ERROR|webApi.Helpers.LoggerManager|Attempted to divide by zero.
 2021-01-28 15:00:33.6488|ERROR|webApi.Helpers.LoggerManager|Attempted to divide by zero.
 2021-01-28 15:12:53.9050|ERROR|CoinTree.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 21:13:41.1295|ERROR|CoinTree.Helpers.LoggerManager|The remote server returned an error: (404) Not Found.
+2021-01-28 21:14:28.9007|ERROR|CoinTree.Helpers.LoggerManager|The remote server returned an error: (404) Not Found.
+2021-01-28 21:19:29.8625|ERROR|CoinTree.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 22:27:50.2731|ERROR|CoinTree.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 22:27:59.2648|ERROR|CoinTree.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 22:28:35.4328|ERROR|CoinTree.Helpers.LoggerManager|Attempted to divide by zero.

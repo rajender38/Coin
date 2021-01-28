@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CoinDetailsController.cs" />
     <Compile Include="Controllers\CoinsTypeController.cs" />
     <Compile Include="Controllers\PercentageChangeController.cs" />
     <Compile Include="Global.asax.cs">

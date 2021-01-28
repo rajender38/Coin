@@ -5,7 +5,7 @@ namespace CoinTree.Helpers
     public static class ChangePercentageValue
     {
 
-        public static decimal GetValue(decimal oldPrice, decimal newPrice)
+        public static double GetValue(double oldPrice, double newPrice)
         {
             try
             {

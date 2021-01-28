@@ -8,9 +8,9 @@
     <script>
         var uriCoinType = 'api/CoinsType';
         var uriPercentageChange = 'api/PercentageChange';
+        var previousAskPrice = 0;
 
         $(document).ready(function () {
-            debugger
             GetCoinTypes();
         });
 
@@ -22,34 +22,46 @@
                     $.each(data, function (key, entry) {
                         dropdownCoinType.append($('<option></option>').attr('value', entry.CoinSymbol).text(entry.CoinSymbol));
                     });
-                    CalcuatePercentageChange();
+                    GetCoinDetails();
+                });
+        }
+
+        function GetCoinDetails() {
+
+            uriCoinDetails = 'api/coindetails/' + $("#dropdownCoinType option:selected").text()
+            $.getJSON(uriCoinDetails)
+                .done(function (data) {
+                    previousAskPrice = parseFloat($("#lblAskPriceValue").text() || 0).toFixed(4);
+                    $("#lblAskPriceValue").text((data.Ask).toFixed(4));
+                    CalcuatePercentageChange((data.Ask).toFixed(4));
                 });
         }
 
 
-
-        function CalcuatePercentageChange() {
-            debugger
-            let data = {
-                CoinType: $("#dropdownCoinType option:selected").text(),
-                OldPrice: $("#lblAskPriceValue").text()
-            }
-            $.post(uriPercentageChange, data, function (data, status) {
-                if (data !== null) {
-                    debugger;
-                    $("#lblAskPriceValue").text(data.AskPrice);
-                    $("#lblPerChangeValue").text(data.ChangePercentage+"%");
-                    $("#lblPerChangeValue").css("color", data.Color);
+        function CalcuatePercentageChange(askPrice) {
+            if (previousAskPrice !== askPrice && previousAskPrice !== "0.0000") {
+                let data = {
+                    PreviousAskPrice: previousAskPrice,
+                    AskPrice: $("#lblAskPriceValue").text()
                 }
-            });
+                $.post(uriPercentageChange, data, function (data, status) {
+                    if (data !== null) {
+                        $("#lblPerChangeValue").text((data.ChangePercentage).toFixed(4) + "%");
+                        $("#lblPerChangeValue").css("color", data.Color);
+                    }
+                });
+            }
         }
 
         function changeCoinType(event) {
-            debugger;
-            CalcuatePercentageChange();
+            previousAskPrice = 0;
+            $("#lblAskPriceValue").text("0");
+            $("#lblPerChangeValue").text("0%");
+            GetCoinDetails();
+
         }
 
-       // window.setInterval(CalcuatePercentageChange, 3000);
+        window.setInterval( GetCoinDetails, 2000);
 
     </script>
 </head>

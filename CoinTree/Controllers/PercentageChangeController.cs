@@ -7,11 +7,9 @@ namespace CoinTree.Controllers
 {
     public class PercentageChangeController : ApiController
     {
-        ICoinTreeWebClient _coinTreeWebClient;
         ILoggerManager _loggerManager;
-        public PercentageChangeController(ICoinTreeWebClient _coinTreeWebClient, ILoggerManager _loggerManager)
+        public PercentageChangeController( ILoggerManager _loggerManager)
         {
-            this._coinTreeWebClient = _coinTreeWebClient;
             this._loggerManager = _loggerManager;
         }
 
@@ -19,11 +17,10 @@ namespace CoinTree.Controllers
         {
             try
             {
-                CoinPriceDetails coinPriceDetails = _coinTreeWebClient.GetCoinDetails(changePercentageInput.CoinType);
-                var changePercantage = ChangePercentageValue.GetValue(coinPriceDetails.Ask, changePercentageInput.OldPrice);
+               
+                var changePercantage = ChangePercentageValue.GetValue(changePercentageInput.AskPrice, changePercentageInput.PreviousAskPrice);
                 return new PriceDetails()
                 {
-                    AskPrice = coinPriceDetails.Ask,
                     ChangePercentage = changePercantage,
                     Color = changePercantage < 0 ? "red" : "green"
                 };
