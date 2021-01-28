@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Coin Tree Test App</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <link href="../Styles/app.css" rel="stylesheet" />
+    <script>
+        var uriCoinType = 'api/CoinsType';
+        var uriPercentageChange = 'api/PercentageChange';
+
+        $(document).ready(function () {
+            debugger
+            GetCoinTypes();
+        });
+
+        function GetCoinTypes() {
+            $.getJSON(uriCoinType)
+                .done(function (data) {
+                    let dropdownCoinType = $('#dropdownCoinType');
+                    dropdownCoinType.empty();
+                    $.each(data, function (key, entry) {
+                        dropdownCoinType.append($('<option></option>').attr('value', entry.CoinSymbol).text(entry.CoinSymbol));
+                    });
+                    CalcuatePercentageChange();
+                });
+        }
+
+
+
+        function CalcuatePercentageChange() {
+            debugger
+            let data = {
+                CoinType: $("#dropdownCoinType option:selected").text(),
+                OldPrice: $("#lblAskPriceValue").text()
+            }
+            $.post(uriPercentageChange, data, function (data, status) {
+                if (data !== null) {
+                    debugger;
+                    $("#lblAskPriceValue").text(data.AskPrice);
+                    $("#lblPerChangeValue").text(data.ChangePercentage+"%");
+                    $("#lblPerChangeValue").css("color", data.Color);
+                }
+            });
+        }
+
+        function changeCoinType(event) {
+            debugger;
+            CalcuatePercentageChange();
+        }
+
+       // window.setInterval(CalcuatePercentageChange, 3000);
+
+    </script>
+</head>
+
+<body>
+    <header style="background-color:green; width:100%; height:100px"></header>
+    <main>
+        <table style="width:100%">
+            <tr>
+                <td class="tdwidth">
+                </td>
+                <td class="tdwidth tdwidthAlignRigh">
+                    <label id="lblSelectCoinType" class="labelStyle"> Select Coin Type :</label>
+                </td>
+                <td class="tdwidth">
+                    <select id="dropdownCoinType" class="dropdownStyle" onchange="changeCoinType(event);"></select>
+                </td>
+                <td class="tdwidth"> </td>
+            </tr>
+            <tr>
+                <td class="tdwidth">
+                </td>
+                <td class="tdwidth tdwidthAlignRigh">
+                    <label id="lblAskPriceLabel" class="labelStyle"> Ask Price :</label>
+                </td>
+                <td class="tdwidth">
+                    <label id="lblAskPriceValue" class="labelStyle"></label>
+                </td>
+                <td class="tdwidth"> </td>
+            </tr>
+            <tr>
+                <td class="tdwidth">
+                </td>
+                <td class="tdwidth tdwidthAlignRigh">
+                    <label id="lblPerChangeLabel" class="labelStyle"> Percentage Change :</label>
+                </td>
+                <td class="tdwidth">
+                    <label id="lblPerChangeValue" class="labelStyle"></label>
+                </td>
+                <td class="tdwidth"> </td>
+            </tr>
+        </table>
+    </main>
+    <footer></footer>
+</body>
+</html>

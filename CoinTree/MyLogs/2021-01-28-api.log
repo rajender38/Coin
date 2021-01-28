@@ -1,0 +1,5 @@
+2021-01-28 14:52:27.6266|ERROR|webApi.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 14:57:05.6297|ERROR|webApi.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 14:59:07.6703|ERROR|webApi.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 15:00:33.6488|ERROR|webApi.Helpers.LoggerManager|Attempted to divide by zero.
+2021-01-28 15:12:53.9050|ERROR|CoinTree.Helpers.LoggerManager|Attempted to divide by zero.

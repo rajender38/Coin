@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.labelStyle {
+    font-size: 15px;
+    font-style: normal;
+}
+
+.tdwidth {
+    width: 25%;
+    padding:10px,10px,10px,10px;
+}
+.tdwidthAlignRigh {
+    text-align: right;
+    padding-right: 15px;
+}
+.dropdownStyle {
+    width:200px
+}
